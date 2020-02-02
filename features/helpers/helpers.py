@@ -7,6 +7,8 @@ def find_element_by(wait, by, element):
         element = wait.until(lambda s: s.find_element(By.ID, element))
     elif by == 'CSS_SELECTOR':
         element = wait.until(lambda s: s.find_element(By.CSS_SELECTOR, element))
+    elif by == 'CLASS_NAME':
+        element = wait.until(lambda s: s.find_element(By.CLASS_NAME, element))
     return element
 
 def clear_input(wait, by, element):

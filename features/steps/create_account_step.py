@@ -5,7 +5,10 @@ from pages.AccountPage import AccountPage
 from data.data import get_main_page_url, random_email_generator
 from faker import Faker
 from hamcrest import *
-import time
+
+user_email = random_email_generator()
+f_name_global = None
+l_name_global = None
 
 @given('User is on the "automationpractice.com" website')
 def navigate_to_selected_webpage(context):
@@ -24,7 +27,7 @@ def click_on_the_sign_in_button(context):
 
 @step('User provide valid email')
 def sign_in_provide_valid_email(context):
-    context.authentication_page.enter_user_email(context.user)
+    context.authentication_page.enter_user_email(user_email)
 
 
 @step('User click on the "Create Account" button')
@@ -38,16 +41,19 @@ def select_person_title(context, title):
 @step('User enter "{first_name}" as a first name')
 def enter_first_name(context, first_name):
     context.f_name = first_name
+    f_name_global = first_name
     context.authentication_page.enter_first_name(first_name)
 
 @step('User enter "{last_name}" as a last name')
 def enter_last_name(context, last_name):
     context.l_name = last_name
+    l_name_global = last_name
     context.authentication_page.enter_last_name(last_name)
 
 @step('User enter "{password}" as a password')
 def enter_user_password(context, password):
-    context.authentication_page.enter_user_password(password)
+    context.passwd = password
+    context.authentication_page.enter_user_password(context.passwd)
 
 @step('User select "{date_of_birth}" as a date of birth')
 def select_date_of_birth(context, date_of_birth):
@@ -86,7 +92,29 @@ def register(context):
     context.authentication_page.click_on_register_button()
 
 @then('User account will be created')
+@then('User is logged into account')
 def assert_user_name(context):
     username_to_assert = context.account_page.get_logged_user_name()
-    user_name_from_step = '{} {}'.format(context.f_name, context.l_name)
+    user_name_from_step = '{} {}'.format(f_name_global, l_name_global)
     assert_that(user_name_from_step, username_to_assert)
+
+@when('User click on "Sign out" button')
+def user_sign_out(context):
+    context.account_page.click_on_sign_out_button()
+
+@then('User is loged out and "{sign_in}" button is visible')
+def sign_in_button_is_visible(context, sign_in):
+    assert_sign_in = context.main_page.get_sign_in_button_name()
+    assert_that(sign_in, assert_sign_in)
+
+@step('User enter valid email')
+def enter_valid_email(context):
+    context.authentication_page.enter_user_email_to_log_in(user_email)
+
+@step('User enter "{password}" as user password')
+def enter_valid_password(context, password):
+    context.authentication_page.enter_user_password_to_log_in(password)
+
+@step('User click on "Sign In" button')
+def sign_in_into_account(context):
+    context.authentication_page.click_on_sign_in_button()

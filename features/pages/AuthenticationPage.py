@@ -10,6 +10,9 @@ class AuthenticationPage:
     def __init__(self, context):
         self.wait = WebDriverWait(context.driver, 10)
         self.email_input_field = 'email_create'
+        self.email_input_field_to_log = 'email'
+        self.password_input_field_to_log = 'passwd'
+        self.sign_in_button = 'SubmitLogin'
         self.create_an_account_button = 'SubmitCreate'
         self.title_mr_radio_button = 'id_gender1'
         self.title_mrs_radio_button = 'id_gender2'
@@ -33,6 +36,17 @@ class AuthenticationPage:
         email_input = find_element_by(self.wait, 'ID', self.email_input_field)
         email_input.send_keys(email)
 
+    def enter_user_email_to_log_in(self, email):
+        email_input = find_element_by(self.wait, 'ID', self.email_input_field_to_log)
+        email_input.send_keys(email)
+
+    def enter_user_password_to_log_in(self, password):
+        passwd = find_element_by(self.wait, 'ID', self.password_input_field_to_log)
+        passwd.send_keys(password)
+
+    def click_on_sign_in_button(self):
+        button_to_click = find_element_by(self.wait, 'ID', self.sign_in_button)
+        button_to_click.click()
 
     def click_on_create_an_account_button(self):
         create_an_account = find_element_by(self.wait, 'ID', self.create_an_account_button)
