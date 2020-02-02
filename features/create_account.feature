@@ -21,4 +21,13 @@ Feature: Account creation
        And User enter address alias for future reference
        And User click on the "Register" button
        Then User account will be created
+       When User click on "Sign out" button
+       Then User is loged out and "Sign in" button is visible
 
+    Scenario: User with valid credentials can log into account
+       Given User is on the "automationpractice.com" website
+       When User click on the "Sign In" button
+       And User enter valid email
+       And User enter "testtesttest" as user password
+       And User click on "Sign In" button
+       Then User is logged into account
