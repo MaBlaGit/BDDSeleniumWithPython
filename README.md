@@ -9,13 +9,13 @@ Tests were written for __http://automationpractice.com/__
 
 Project was written in Python 3.7.6 but any version of Python 3.x should be fine.
 
-As a default browser Chrome was used so make sure that Chrome on your local machine is installed
+As a default browser Chrome was used so make sure that Chrome on your local machine is installed.
 
-__chromedriver__ is required to run Selenium tests in Chrome browser. Depending of the browser version, download appropriate driver from __https://chromedriver.chromium.org/downloads__
+__Chromedriver__ is required to run Selenium tests in Chrome browser. Depending of the browser version, download appropriate driver from __https://chromedriver.chromium.org/downloads__
 
 1 Clone repo
 
-2 Got to the root folder of the project and create virtual environment - __python3 -m venv $(pwd)/venv__ (more info here: __https://docs.python.org/3.7/library/venv.html__)
+2 Go to the root folder of the project and create virtual environment - __python3 -m venv $(pwd)/venv__ (more info here: __https://docs.python.org/3.7/library/venv.html__)
 
 3 Activate virtual environment - __source ./venv/bin/activate__
 
